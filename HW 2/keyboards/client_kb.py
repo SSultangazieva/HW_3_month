@@ -29,6 +29,7 @@ share_contact = KeyboardButton("Share contact", request_contact=True)
 
 
 
+
 # 4) добавляем кнопки для блока кнопок:  (т.е. блок кнопок будет состоять из этих кнопок)
 start_markup.add(start_button, info_button, quiz_button,
                  share_location, share_contact,mem_button)

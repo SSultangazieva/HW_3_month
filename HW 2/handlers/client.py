@@ -2,9 +2,9 @@
 
 from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from config import bot, dp
+from config import bot, dp, ADMINS
 from keyboards.client_kb import start_markup
-
+import random
 
 # @dp.message_handler(commands=['start', 'help'])
 async def start_handler(message: types.Message):
@@ -51,8 +51,17 @@ async def quiz_1(message: types.Message):
         reply_markup=markup
     )
 
+async def pin(message: types.Message):
+    # ЗАКРЕПИТ сообщение начинаещееся на !pin
+    #  if message.text.startswith('!pin'):
+    #     await bot.pin_chat_message(message.chat.id, message.message_id)
 
-
+    # ЗАКРЕПИТ сообщение начинаещееся на !pin, то сообщение, на которое отвечено !pin - message.reply_to_message.message_id
+    if message.text.startswith('!pin') and message.chat.type != "private":
+        if message.reply_to_message:
+            await bot.pin_chat_message(message.chat.id, message.reply_to_message.message_id)
+        else:
+            await bot.send_message(message.chat.id, 'не ответ на сообщение')
 
 
 # регистрация функционала
@@ -62,3 +71,4 @@ def register_handlers_client(dp: Dispatcher): #в функцию принима�
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(info_handler, commands=['info'])
     dp.register_message_handler(handler, commands=['mem'])
+    dp.register_message_handler(pin, commands=['pin'], commands_prefix='!')
