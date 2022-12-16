@@ -28,7 +28,7 @@ async def echo(message: types.Message):
     #     await bot.pin_chat_message(message.chat.id, message.message_id)
 
     # ЗАКРЕПИТ сообщение начинаещееся на !pin, то сообщение, на которое отвечено !pin - message.reply_to_message.message_id
-    if message.text.startswith('!pin'):
+    if message.text.startswith('!pin') and message.chat.type != "private":
         await bot.pin_chat_message(message.chat.id, message.reply_to_message.message_id)
 
     # if message.text == 'dice':
@@ -41,6 +41,12 @@ async def echo(message: types.Message):
         print(lst[random_index])
         await message.answer(lst[random_index])
         # print(message.from_user.id)
+
+    if message.chat.type == "private":
+        if str(message.text).isdigit():
+            await bot.send_message(chat_id=message.from_user.id, text=int(message.text) ** 2)
+        else:
+            await bot.send_message(chat_id=message.from_user.id, text=message.text)
 
 
 # регистрация функционала
