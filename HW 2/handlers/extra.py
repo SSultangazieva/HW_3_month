@@ -35,7 +35,7 @@ async def echo(message: types.Message):
     #  a = await bot.send_dice(message.chat.id, emoji='🎳')
     # print(a.dice.value)
 
-    if message.text.startswith("game") and message.from_user.id in ADMINS:
+    if message.text.startswith("game") and message.from_user.id in ADMINS and message.chat.type != "private":
         lst = ["🎳", "🎲", "🎰", "🎯", "⚽", "🏀"]
         random_index = random.randrange(len(lst))
         print(lst[random_index])
