@@ -24,13 +24,31 @@ share_location = KeyboardButton("Share location", request_location=True)
 # кнопка для того чтобы поделиться своим контактом:
 share_contact = KeyboardButton("Share contact", request_contact=True)
 
-# кнопки с нуля со своим функционалом: ПОТОМ УЗНАЮ?????????
-
-
-
-
-
 # 4) добавляем кнопки для блока кнопок:  (т.е. блок кнопок будет состоять из этих кнопок)
 start_markup.add(start_button, info_button, quiz_button,
                  share_location, share_contact,mem_button)
 #количество кнопок в строке можно контролировать через каждый отдельный add()
+
+
+
+#кнопки отмены регистрации:
+cancel_button = KeyboardButton('CANCEL')
+cancel_markup = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+).add(cancel_button)
+
+# кнопки направлений
+direction_markup = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+).add(KeyboardButton("backend"), KeyboardButton("frontend"), KeyboardButton("ios/android"), KeyboardButton("fullstack"),KeyboardButton("UX-UI"))
+
+# кнопки итогового подтверждения
+submit_markup = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+).add(KeyboardButton('ДА'), KeyboardButton('НЕТ'))
+
+
+

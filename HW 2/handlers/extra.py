@@ -6,8 +6,11 @@ from config import bot, dp, ADMINS
 
 # принцип-DRY - Don't Repeat Yourself
 # @dp.message_handler()
+
 async def echo(message: types.Message):
+    # флаг на наличие плохих слов. Пока стоит False
     have_bad_word = False
+    # выбор чата: в данном случае в группе
     if message.chat.type != "private":
         bad_words = ['JavaScript', 'html', 'жаман', 'чокун', 'зараза']
         username = f"@{message.from_user.username}" \
@@ -20,19 +23,28 @@ async def echo(message: types.Message):
                 # и ОТВЕТИТ заданный текст:
                 await message.answer(f"Не матерись {username}, "
                                      f"сам ты {i}!")
+                # флаг на наличие плохих слов. как найдет станет True
                 have_bad_word = True
 
-    # эхо-бот в приватном чате
+    # отправка анимированных эмоджи: методом-send_dice
     if not have_bad_word:
         if message.text.startswith("game") and message.chat.id in ADMINS:
             lst = ["🎳", "🎲", "🎰", "🎯", "⚽", "🏀"]
             random_index = random.randrange(len(lst))
-            # print(lst[random_index])
-            await bot.send_dice(message.chat.id, emoji=lst[random_index])
+            # для отправки эмоджи используем метод send_dice
+            await bot.send_dice(message.chat.id, emoji=lst[random_index]) #emoji= здесь можно конкретоное эмоджи указать
+        # эхо-бот в приватном чате
         elif str(message.text).isdigit():
             await bot.send_message(chat_id=message.chat.id, text=int(message.text) ** 2)
         else:
             await bot.send_message(chat_id=message.chat.id, text=message.text)
+
+# отправка эмоджи:
+        #if message.text == 'dice':
+        #a = await bot.send_dice(message.chat.id, emoji='🎳')
+        # print(a.dice.value)
+
+
 
     # в группе (а не в личном чате с ботом)
     # проверка на плохие слова:

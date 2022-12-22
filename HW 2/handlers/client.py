@@ -56,9 +56,10 @@ async def pin(message: types.Message):
     #  if message.text.startswith('!pin'):
     #     await bot.pin_chat_message(message.chat.id, message.message_id)
 
-    # ЗАКРЕПИТ сообщение начинаещееся на !pin, то сообщение, на которое отвечено !pin - message.reply_to_message.message_id
+    # ЗАКРЕПИТ сообщение, на которое отвечено !pin админом - message.reply_to_message.message_id
     if message.text.startswith('!pin') and message.chat.type != "private":
         if message.reply_to_message:
+            # 1) где закреплять 2) какое сообщение закреплять
             await bot.pin_chat_message(message.chat.id, message.reply_to_message.message_id)
         else:
             await bot.send_message(message.chat.id, 'не ответ на сообщение')
