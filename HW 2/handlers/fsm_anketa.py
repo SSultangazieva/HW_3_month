@@ -18,7 +18,7 @@ class FSMAdmin(StatesGroup): # создаем класс, котораянасл
     name = State()
     direction = State()
     age = State()
-    group = State()
+    gruppa = State()
     photo = State()
     submit = State() # в конце запросит подтверждение
 
@@ -28,19 +28,29 @@ async def fsm_start(message: types.Message):
     # регистрация должна быть только в личном чате с ботом
     if message.chat.type == 'private' and message.from_user.id in ADMINS:
         #активировать FSM с первого объекта через функцию set() - ЗАПУСТИТЬ FSM режим
-        await FSMAdmin.name.set()
+        await FSMAdmin.id.set()
         # послать вопрос для заполнения каждого режима:
-        await message.answer("Как вас зовут?", reply_markup=client_kb.cancel_markup) #
+        await message.answer("Айди ментора?", reply_markup=client_kb.cancel_markup) #
     else:
         await message.answer("Пиши в личке!") # ЗАДАТЬ СЛЕДУЮЩИЙ ВОПРОС ?????????
 
+
+async def load_id(message: types.Message, state: FSMContext):
+    try:
+        id = int(message.text)
+        async with state.proxy() as data:
+            data['id'] = id
+        await FSMAdmin.next()
+        await message.answer('имя ментора:', reply_markup=client_kb.cancel_markup)
+    except:
+        await message.answer('Айди только из цифр', reply_markup=client_kb.cancel_markup)
 # 3) функция, которая принимает и записывает данные в кэш:
 async def load_name(message: types.Message, state: FSMContext):
     # открыть кэш как переменную data
     # там все хранится в типе dict
     async with state.proxy() as data:
         # Создание случайного идентификатора с помощью uuid1()
-        data['id'] = int(uuid. uuid1())
+        # data['id'] = int(uuid. uuid1())
         # можно забрать данные не запрашивая:
         data['username'] = f"@{message.from_user.username}"
         data['name'] = message.text
@@ -74,7 +84,7 @@ async def load_age(message: types.Message, state: FSMContext):
 
 async def load_group(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['group'] = message.text
+        data['gruppa'] = message.text
     await FSMAdmin.next()
     await message.answer("Скиньте фотку?)")
 
@@ -85,8 +95,8 @@ async def load_photo(message: types.Message, state: FSMContext):
         data['photo'] = message.photo[0].file_id
         # вывести пользователю все данные:
         await message.answer_photo(data['photo'],
-                                   caption=f"id:{data['id']},\n name: {data['name']}, direction: {data['direction']}, "
-                                           f"age: {data['age']}\ngroup: {data['group']}\n{data['username']}")
+                                   caption=f"name: {data['name']}, direction: {data['direction']}, "
+                                           f"age: {data['age']}\ngroup: {data['gruppa']}\n{data['username']}")
         # caption отправит как ОПИСАНИЕ ФОТО
     await FSMAdmin.next()
     await message.answer("Все верно?", reply_markup=client_kb.submit_markup)
@@ -94,13 +104,10 @@ async def load_photo(message: types.Message, state: FSMContext):
 # попросить подтверждения
 async def submit(message: types.Message, state: FSMContext):
     if message.text.lower() == "да":
-        # ВНЕСТИ СОБРАННУЮ ИНФУ В БАЗУ ДАННЫХ
-
-
+        # ВНЕСТИ СОБРАННУЮ ИНФУ В БАЗУ ДАННЫХw
         await sql_command_insert(state)
         # после внесени в БД закрыть FSM режим. ВСЕ ЧТО НАПИСАНО ОЧИЩАЕТСЯ
         await state.finish()
-
         await message.answer("вы зарегистрированы")
     elif message.text.lower() == "нет":
         await state.finish()
@@ -128,9 +135,10 @@ def register_handlers_fsm_anketa(dp: Dispatcher):
     dp.register_message_handler(fsm_start, commands=['reg'])
 
     # регистация команд состояний
+    dp.register_message_handler(load_id, state=FSMAdmin.id)
     dp.register_message_handler(load_name, state=FSMAdmin.name) #чтобы группа name работала на состоянии state=FSMAdmin.name
     dp.register_message_handler(load_direction, state=FSMAdmin.direction)
     dp.register_message_handler(load_age, state=FSMAdmin.age)
-    dp.register_message_handler(load_group, state=FSMAdmin.group)
+    dp.register_message_handler(load_group, state=FSMAdmin.gruppa)
     dp.register_message_handler(load_photo, state=FSMAdmin.photo, content_types=['photo']) #только фото принимает content_types
     dp.register_message_handler(submit, state=FSMAdmin.submit)

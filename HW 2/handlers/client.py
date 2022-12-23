@@ -5,6 +5,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot, dp, ADMINS
 from keyboards.client_kb import start_markup
 import random
+from database.bot_db import sql_command_random
 
 # @dp.message_handler(commands=['start', 'help'])
 async def start_handler(message: types.Message):
@@ -64,6 +65,8 @@ async def pin(message: types.Message):
         else:
             await bot.send_message(message.chat.id, 'не ответ на сообщение')
 
+async def get_random_user(message: types.Message):
+    await sql_command_random(message)
 
 # регистрация функционала
 def register_handlers_client(dp: Dispatcher): #в функцию принимается параметр диспетчер и его тип данных-Dispatcher
@@ -73,3 +76,4 @@ def register_handlers_client(dp: Dispatcher): #в функцию принима�
     dp.register_message_handler(info_handler, commands=['info'])
     dp.register_message_handler(handler, commands=['mem'])
     dp.register_message_handler(pin, commands=['pin'], commands_prefix='!')
+    dp.register_message_handler(get_random_user, commands=['get'])

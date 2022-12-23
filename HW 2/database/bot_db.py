@@ -8,7 +8,7 @@ import sqlite3
 def sql_create():
     global db, cursor
     # в db хранится подключение
-    db = sqlite3.connect("bot.db") # или bot.sqlite3
+    db = sqlite3.connect("db.sqlite3") # или bot.sqlite3
     # cursor - ею мы отправляем наши запросы в БД
     cursor = db.cursor()
 
@@ -17,7 +17,7 @@ def sql_create():
 
     # создаем таблицу в БД  db.execute - когда
     db.execute("CREATE TABLE IF NOT EXISTS mentors"
-               "(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, "
+               "(id INTEGER PRIMARY KEY, username TEXT, "
                "name TEXT,direction TEXT, age INTEGER, gruppa TEXT, "
                "photo TEXT)")
     # сохранить изменения (подтвердить наши изменения)
