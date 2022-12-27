@@ -3,7 +3,7 @@
 # from time import sleep #функция чтобы приостанавливать работу кода
 # from asyncio import sleep
 
- -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 
 print("fghjk")
 # def download_photo(photo_count, limit):
