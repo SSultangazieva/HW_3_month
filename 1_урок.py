@@ -125,3 +125,10 @@ TOKEN = "5830047027:AAFwZTkzZ6DnhlN27j0NtNIGz6sHrH7JKaE"
 #     # наш код запускается и выходит на онлайн через executor у него метод start_polling
 #     executor.start_polling(dp, skip_updates=True)
     # skip_updates пропускать обновления (когда бот отключится и включится: True-не ответит на пропущенные сообщения.  False-ответит)'''
+
+
+
+
+
+
+ggh = 5
