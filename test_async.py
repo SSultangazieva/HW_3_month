@@ -1,16 +1,16 @@
-# тестирование асинхронности:
+# пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:
 # import asyncio
-# from time import sleep #функция чтобы приостанавливать работу кода
+# from time import sleep #пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 # from asyncio import sleep
 
  # -*- coding: utf-8 -*-
 
-print("fghjk")
+print("hello world")
 # def download_photo(photo_count, limit):
 #     while True:
 #         if photo_count > limit:
 #             break
-#         sleep(1) #симуляция загрузки:sleep
+#         sleep(1) #пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:sleep
 #         photo_count += 1
 #         print(f"Photo {photo_count}...")
 #
@@ -26,7 +26,7 @@ print("fghjk")
 #     while True:
 #         if photo_count > limit:
 #             break
-#         await sleep(1) #симуляция загрузки:sleep
+#         await sleep(1) #пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:sleep
 #         photo_count += 1
 #         print(f"Photo {photo_count}...")
 #

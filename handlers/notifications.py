@@ -7,11 +7,11 @@ import asyncio
 async def get_chat_id(message: types.Message):
     global chat_id
     chat_id = message.from_user.id
-    await message.answer("Сделаю!!!")
+    await message.answer("РЎРґРµР»Р°СЋ!!!")
 
 
 async def go_to_lesson():
-    await bot.send_message(chat_id=chat_id, text="Уважаемые ментора, сегодня в 13/00 состоится дополнительный урок", encoding="UTF-8")
+    await bot.send_message(chat_id=chat_id, text="РЈРІР°Р¶Р°РµРјС‹Рµ РјРµРЅС‚РѕСЂР°, СЃРµРіРѕРґРЅСЏ РІ 13/00 СЃРѕСЃС‚РѕРёС‚СЃСЏ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Р№ СѓСЂРѕРє")
 
 
 async def scheduler():
@@ -24,5 +24,5 @@ async def scheduler():
 
 def register_handlers_notification(dp: Dispatcher):
     dp.register_message_handler(get_chat_id,
-                                lambda word: 'напомни'  in word.text, encoding="UTF-8")
+                                lambda word: 'РЅР°РїРѕРјРЅРё' in word.text)
 
