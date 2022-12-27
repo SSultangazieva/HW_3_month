@@ -11,7 +11,7 @@ async def get_chat_id(message: types.Message):
 
 
 async def go_to_lesson():
-    await bot.send_message(chat_id=chat_id, text="Уважаемые ментора, сегодня в 13/00 состоится дополнительный урок")
+    await bot.send_message(chat_id=chat_id, text="Уважаемые ментора, сегодня в 13/00 состоится дополнительный урок", encoding="UTF-8")
 
 
 async def scheduler():
@@ -24,5 +24,5 @@ async def scheduler():
 
 def register_handlers_notification(dp: Dispatcher):
     dp.register_message_handler(get_chat_id,
-                                lambda word: 'напомни' in word.text)
+                                lambda word: 'напомни'  in word.text, encoding="UTF-8")
 
