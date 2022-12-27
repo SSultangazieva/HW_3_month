@@ -104,7 +104,7 @@ async def load_photo(message: types.Message, state: FSMContext):
 # попросить подтверждения
 async def submit(message: types.Message, state: FSMContext):
     if message.text.lower() == "да":
-        # ВНЕСТИ СОБРАННУЮ ИНФУ В БАЗУ ДАННЫХw
+        # ВНЕСТИ СОБРАННУЮ ИНФУ В БАЗУ ДАННЫХ
         await sql_command_insert(state)
         # после внесени в БД закрыть FSM режим. ВСЕ ЧТО НАПИСАНО ОЧИЩАЕТСЯ
         await state.finish()
