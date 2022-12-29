@@ -33,11 +33,12 @@ async def echo(message: types.Message):
             random_index = random.randrange(len(lst))
             # для отправки эмоджи используем метод send_dice
             await bot.send_dice(message.chat.id, emoji=lst[random_index]) #emoji= здесь можно конкретоное эмоджи указать
-        # эхо-бот в приватном чате
-        elif str(message.text).isdigit():
-            await bot.send_message(chat_id=message.chat.id, text=int(message.text) ** 2)
-        else:
-            await bot.send_message(chat_id=message.chat.id, text=message.text)
+
+        # # эхо-бот в приватном чате
+        # elif str(message.text).isdigit():
+        #     await bot.send_message(chat_id=message.chat.id, text=int(message.text) ** 2)
+        # else:
+        #     await bot.send_message(chat_id=message.chat.id, text=message.text)
 
 # отправка эмоджи:
         #if message.text == 'dice':

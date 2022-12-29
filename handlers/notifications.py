@@ -15,7 +15,7 @@ async def go_to_lesson():
 
 
 async def scheduler():
-    aioschedule.every().sunday.at('11:00').do(go_to_lesson)
+    aioschedule.every().wednesday.at('16:35').do(go_to_lesson)
 
     while True:
         await aioschedule.run_pending()
@@ -25,4 +25,3 @@ async def scheduler():
 def register_handlers_notification(dp: Dispatcher):
     dp.register_message_handler(get_chat_id,
                                 lambda word: 'напомни' in word.text)
-

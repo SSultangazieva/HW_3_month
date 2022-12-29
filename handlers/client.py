@@ -6,6 +6,10 @@ from config import bot, dp, ADMINS
 from keyboards.client_kb import start_markup
 import random
 from database.bot_db import sql_command_random
+from parser.anime import parser
+from parser import bags
+from parser.parsep import parser
+
 
 # @dp.message_handler(commands=['start', 'help'])
 async def start_handler(message: types.Message):
@@ -68,6 +72,36 @@ async def pin(message: types.Message):
 async def get_random_user(message: types.Message):
     await sql_command_random(message)
 
+async def get_pars(message: types.Message):
+    pars = parser()
+    for i in pars:
+        await message.answer(
+            f"{i['link']}\n\n"
+            f"{i['title']}\n"
+            f"{i['status']}\n"
+            f"#Y{i['date']}\n"
+            f"#{i['country']}\n"
+            f"#{i['genre']}\n"
+        )
+async def parser_bags(message: types.Message):
+    data = bags.parser()
+    for item in data:
+        await bot.send_message(message.from_user.id, f"{item['brand']}\n\n"
+                                                     f"{item['link']}\n\n"
+                                                     f"{item['price']}")
+
+
+async def get_anime(message: types.Message):
+    anime = parser()
+    for i in anime:
+        await message.answer(
+            f"{i['link']}\n\n"
+            f"{i['title']}\n"
+            f"{i['status']}\n"
+            f"#Y{i['date']}\n"
+            f"#{i['country']}\n"
+            f"#{i['genre']}\n"
+        )
 # регистрация функционала
 def register_handlers_client(dp: Dispatcher): #в функцию принимается параметр диспетчер и его тип данных-Dispatcher
     # в зависимости что резистрируем применяем метод, (название функции (без вызова) прописываем команды):
@@ -77,3 +111,7 @@ def register_handlers_client(dp: Dispatcher): #в функцию принима�
     dp.register_message_handler(handler, commands=['mem'])
     dp.register_message_handler(pin, commands=['pin'], commands_prefix='!')
     dp.register_message_handler(get_random_user, commands=['get'])
+    dp.register_message_handler(get_pars, commands=['pars'])
+    dp.register_message_handler(get_anime, commands=['anime'])
+    dp.register_message_handler(parser_bags, commands=['bags'])
+

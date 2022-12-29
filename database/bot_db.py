@@ -1,6 +1,7 @@
 import random
 import sqlite3
 
+
 # СУБД - Система управления базой данных
 # SQL = Structured Query Language
 
@@ -8,7 +9,7 @@ import sqlite3
 def sql_create():
     global db, cursor
     # в db хранится подключение
-    db = sqlite3.connect("db.sqlite3") # или bot.sqlite3
+    db = sqlite3.connect("db.sqlite3")  # или bot.sqlite3
     # cursor - ею мы отправляем наши запросы в БД
     cursor = db.cursor()
 
@@ -22,6 +23,8 @@ def sql_create():
                "photo TEXT)")
     # сохранить изменения (подтвердить наши изменения)
     db.commit()
+
+
 # сам запуск в main.py
 
 # заполнение таблицы в БД

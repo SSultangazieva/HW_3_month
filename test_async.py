@@ -3,9 +3,7 @@
 # from time import sleep #������� ����� ���������������� ������ ����
 # from asyncio import sleep
 
- # -*- coding: utf-8 -*-
 
-print("hello world")
 # def download_photo(photo_count, limit):
 #     while True:
 #         if photo_count > limit:
