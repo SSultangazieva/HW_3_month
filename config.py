@@ -15,6 +15,7 @@ bot = Bot(TOKEN)
 dp = Dispatcher(bot=bot, storage=storage) # подключить объект кэша к боту
 
 ADMINS = [5367214519,  1720206106]
+
 # ID Асылбека:
 Asylbek = [5022825338]
 

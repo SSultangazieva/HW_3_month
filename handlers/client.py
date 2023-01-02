@@ -6,8 +6,7 @@ from config import bot, dp, ADMINS
 from keyboards.client_kb import start_markup
 import random
 from database.bot_db import sql_command_random
-from parser.parser import Parser_Svetofor
-
+from parser.svetofor import parser
 
 
 # @dp.message_handler(commands=['start', 'help'])
@@ -74,7 +73,7 @@ async def get_random_user(message: types.Message):
 
 
 async def get_svetofor(message: types.Message):
-    iphone = Parser_Svetofor.parser()
+    iphone = parser()
     for i in iphone:
         await message.answer_photo(photo=i['image'], caption=f"{i['name']}\n\n"
             f"{i['link']}\n"
